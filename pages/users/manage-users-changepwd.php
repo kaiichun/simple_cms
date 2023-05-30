@@ -17,6 +17,7 @@
     $query->execute([
         'id' => $_GET['id']
     ]);
+    
 
     $user = $query->fetch();
 
