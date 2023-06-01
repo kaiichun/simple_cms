@@ -29,13 +29,13 @@
         case "users/changepwd":
             require "includes/users/changepwd.php";
             break;
-        case "post/add":
+        case "posts/add":
             require "includes/post/add.php";
             break;
-        case "post/edit":
+        case "posts/edit":
             require "includes/post/edit.php";
             break;
-        case "post/delete":
+        case "posts/delete":
             require "includes/post/delete.php";
             break;
         case 'dashboard': //condition

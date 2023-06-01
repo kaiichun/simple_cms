@@ -1,4 +1,12 @@
 <?php
+
+
+  // make sure the user is logged in
+  if ( !isUserLoggedIn() ) {
+    header("Location: /");
+    exit;
+}
+
   require "parts/header.php";
 ?>
 

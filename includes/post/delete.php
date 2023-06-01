@@ -1,5 +1,11 @@
 <?php
 
+if ( !isUserLoggedIn() ) {
+    header("Location: /");
+    exit;
+}
+
+
     $database = connectToDB();
 
     $id = $_POST['id'];

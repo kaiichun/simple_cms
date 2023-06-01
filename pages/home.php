@@ -1,47 +1,40 @@
 <?php
+
+  // load data from database
+  $database = connectToDB();
+
+ // ASC - acens
+ $sql = "SELECT * FROM posts where status = 'publish' ORDER BY id DESC";
+  $query = $database->prepare($sql);
+  $query->execute();
+
+  // fetch the data from query
+  $posts = $query->fetchAll();
+
   require "parts/header.php";
 ?>
     <div class="container mx-auto my-5" style="max-width: 500px;">
       <h1 class="h1 mb-4 text-center">My Blog</h1>
+      <?php foreach ($posts as $post) : ?>
       <div class="card mb-2">
         <div class="card-body">
-          <h5 class="card-title">Post 4</h5>
-          <p class="card-text">Here's some content about post 4</p>
-          <div class="text-end">
-            <a href="/post" class="btn btn-primary btn-sm">Read More</a>
-          </div>
+          <h5 class="card-title"><?= $post['title']; ?></h5>
+          <p class="card-text"><?php 
+            $excerpt = str_split( $post['content'], 100 );
+            echo $excerpt[0]; 
+          ?> <a href="/post?id=<?= $post['id']; ?>">Read More</a>  </p>
+          </br>
+          <p class="text-end">
+          created by <strong><?= $_SESSION['user']['name'] ?>.</strong>
+        </p>
+      
+         
         </div>
       </div>
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">Post 3</h5>
-          <p class="card-text">This is for post 3</p>
-          <div class="text-end">
-            <a href="/post" class="btn btn-primary btn-sm">Read More</a>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">Post 2</h5>
-          <p class="card-text">This is about post 2</p>
-          <div class="text-end">
-            <a href="/post" class="btn btn-primary btn-sm">Read More</a>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">Post 1</h5>
-          <p class="card-text">This is a post</p>
-          <div class="text-end">
-            <a href="/post" class="btn btn-primary btn-sm">Read More</a>
-          </div>
-        </div>
-      </div>
+      <?php endforeach; ?>
 
       <div class="mt-4 d-flex justify-content-center gap-3">
-      <?php if ( isset( $_SESSION["user"] ) ) { ?>
+      <?php if ( isUserLoggedIn() ) { ?>
             <a href="/dashboard" class='m-2 text-decoration-none'>Dashboard</a>
             <a href="/logout" class='m-2  text-decoration-none'>Logout</a>
           <?php } else { ?>
@@ -53,4 +46,6 @@
 
 <?php
     require 'parts/footer.php';
-?>
+      
+
+//isset( $_SESSION["user"] 
