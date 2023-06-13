@@ -1,5 +1,7 @@
 <?php
-  require "parts/header.php";
+
+  require "parts/header.php"
+
 ?>
     <div class="container mx-auto my-5" style="max-width: 800px;">
       <h1 class="h1 mb-4 text-center">Dashboard</h1>
@@ -14,15 +16,14 @@
                 Manage Posts
               </h5>
               <div class="text-center mt-3">
-                <a href="/manage-posts" class="btn btn-primary btn-sm"
+                <a href="/manage-post" class="btn btn-primary btn-sm"
                   >Access</a
                 >
               </div>
             </div>
           </div>
         </div>
-        <!-- only show this option if is admin -->
-        <?php if ( isAdmin() ) : ?>
+        <?php if ( Auth::isAdmin() ) : ?>
         <div class="col">
           <div class="card mb-2">
             <div class="card-body">
@@ -49,6 +50,8 @@
       </div>
     </div>
 
-    <?php
-      require "parts/footer.php";
-    
+<?php
+
+  require "parts/footer.php"
+
+?>

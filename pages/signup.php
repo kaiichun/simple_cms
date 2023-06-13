@@ -1,14 +1,14 @@
 <?php
-  require "parts/header.php";
+
+  require "parts/header.php"
+
 ?>
-       <div class="container my-5 mx-auto" style="max-width: 500px;">
+    <div class="container my-5 mx-auto" style="max-width: 500px;">
       <h1 class="h1 mb-4 text-center">Sign Up a New Account</h1>
 
       <div class="card p-4">
-      <?php    
-            require 'parts/message_error.php';
-            ?>
-        <form method="POST" action="/auth/signup">
+        <?php require "parts/error.php"?>
+        <form method="POST" action="auth/signup">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" />
@@ -45,6 +45,7 @@
         </form>
       </div>
 
+      <!-- links -->
       <div
         class="d-flex justify-content-between align-items-center gap-3 mx-auto pt-3"
       >
@@ -57,7 +58,8 @@
         ></a>
       </div>
     </div>
-
 <?php
-    require "parts/footer.php";
+
+  require "parts/footer.php"
+
 ?>

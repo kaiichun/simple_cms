@@ -2,7 +2,13 @@
     session_start();
 
     // require all the functions files
-    require "includes/functions.php";
+    require "includes/class-db.php";
+    require "includes/class-auth.php";
+    require "includes/class-user.php";
+    require "includes/class-post.php";
+    require "includes/class-comment.php";
+    
+    // require "includes/function.php";
 
     // your website path
     // parse_url will remove all the query string starting from the ?
@@ -12,31 +18,34 @@
 
     switch ($path) {
         case 'auth/login':
-            require "includes/auth/login.php";
+            Auth::login(); 
             break;
         case 'auth/signup':
-            require "includes/auth/signup.php";
+            Auth::signup(); 
             break;
         case "users/add":
-            require "includes/users/add.php";
+            User::add(); 
             break;
         case "users/edit":
-            require "includes/users/edit.php";
-            break;
-        case "users/delete":
-            require "includes/users/delete.php";
+            User::edit(); 
             break;
         case "users/changepwd":
-            require "includes/users/changepwd.php";
+            User::changepwd(); 
+            break;
+        case "users/delete":
+            User::delete(); 
             break;
         case "posts/add":
-            require "includes/post/add.php";
+            Post::add(); 
             break;
         case "posts/edit":
-            require "includes/post/edit.php";
+            Post::edit(); 
             break;
         case "posts/delete":
-            require "includes/post/delete.php";
+            Post::delete(); 
+            break;
+        case "comments/add":
+            Comment::add();
             break;
         case 'dashboard': //condition
             require "pages/dashboard.php";
@@ -45,16 +54,16 @@
             require "pages/login.php";
             break;
         case 'logout': //condition
-            require "pages/logout.php";
+            Auth::logout(); 
             break;
-        case 'manage-posts': //condition
-            require "pages/posts/manage-posts.php";
+        case 'manage-post': //condition
+            require "pages/posts/manage-post.php";
             break;
-        case 'manage-posts-add': //condition
-            require "pages/posts/manage-posts-add.php";
+        case 'manage-post-add': //condition
+            require "pages/posts/manage-post-add.php";
             break;
-        case 'manage-posts-edit': //condition
-            require "pages/posts/manage-posts-edit.php";
+        case 'manage-post-edit': //condition
+            require "pages/posts/manage-post-edit.php";
             break;
         case 'manage-users': //condition
             require "pages/users/manage-users.php";

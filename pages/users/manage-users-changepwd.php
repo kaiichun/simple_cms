@@ -1,36 +1,13 @@
 <?php
-
     // check if the current user is an admin or not
-    if ( !isAdmin() ) {
-      // if current user is not an admin, redirect to dashboard
-      header("Location: /dashboard");
-      exit;
-    }
-    
-  // make sure the id parameter in the url is belongs to a valid user in the database
-  if ( isset( $_GET['id'] ) ) {
-
-    $database = connectToDB();
-
-    $sql = "SELECT * FROM users WHERE id = :id";
-    $query = $database->prepare( $sql );
-    $query->execute([
-        'id' => $_GET['id']
-    ]);
-    
-
-    $user = $query->fetch();
-
-    // if is not a valid user, redirect back to /manage-users
-    if (!$user) {
-      header("Location:/manage-users");
-      exit;
-    }
-
-  } else {
-    header("Location: /manage-users");
+  if ( !Auth::isAdmin() ) {
+    // if current user is not an admin, redirect to dashboard
+    header("Location: /dashboard");
     exit;
   }
+
+  // make sure the id parameter in the url is belongs to a valid user in the database
+  $users = User::getUserByID( $_GET ["id"] );
 
   require "parts/header.php";
 ?>
@@ -48,7 +25,7 @@
           5. add the error message
         -->
         <form method="POST" action="users/changepwd">
-          <?php require "parts/message_error.php";?>
+          <?php require "parts/error.php";?>
           <div class="mb-3">
             <div class="row">
               <div class="col">
@@ -69,7 +46,7 @@
             </div>
           </div>
           <div class="d-grid">
-            <input type="hidden" name="id" value="<?= $user['id']; ?>"/>
+            <input type="hidden" name="id" value="<?= $users['id']; ?>"/>
             <button type="submit" class="btn btn-primary">
               Change Password
             </button>

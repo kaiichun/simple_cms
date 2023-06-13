@@ -1,11 +1,9 @@
 <?php
-
-        // check if the current user is an admin or not
-        if ( !isAdmin() ) {
-            // if current user is not an admin, redirect to dashboard
-            header("Location: /dashboard");
-            exit;
-          }
+     // make sure the user is logged in
+     if ( !Auth::isUserLoggedIn() ) {
+        header("Location: /");
+        exit;
+    }
 
     // load database
     $database = connectToDB();
@@ -36,8 +34,8 @@
         $error = 'All fields are required';
     } else if ( $password !== $confirm_password ) {
         $error = 'The password is not match.';
-    } else if ( strlen( $password ) < 6 ) {
-        $error = "Your password must be at least 6 characters";
+    } else if ( strlen( $password ) < 8 ) {
+        $error = "Your password must be at least 8 characters";
     } else if ( $user ) {
         $error = "The email you inserted has already been used by another user. Please insert another email.";
     }
@@ -65,4 +63,3 @@
         exit;
 
     }
-

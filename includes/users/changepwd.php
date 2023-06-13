@@ -1,10 +1,9 @@
 <?php
-    // check if the current user is an admin or not
-    if ( !isAdmin() ) {
-        // if current user is not an admin, redirect to dashboard
-        header("Location: /dashboard");
+     // make sure the user is logged in
+     if ( !Auth::isUserLoggedIn() ) {
+        header("Location: /");
         exit;
-      }
+    }
 
     // load the databse
     $database = connectToDB();
@@ -39,7 +38,7 @@
     $sql = "UPDATE users SET password = :password WHERE id = :id";
     $query = $database->prepare($sql);
     $query->execute([
-        'password' => password_hash($password, PASSWORD_DEFAULT),
+        'password' => $password,
         'id' => $id
     ]);
 

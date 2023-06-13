@@ -1,9 +1,5 @@
-<?php 
+<?php
+    unset($_SESSION['user']);
 
-
-    unset( $_SESSION['user'] );
-
-    header("Location: /login");
+    header('Location: /');
     exit;
-
-    ?>
